@@ -1,4 +1,4 @@
-# 🧠 Computer Vision Projects
+# 🔐🔥 AI-Based Surveillance & Fire Detection Projects
 
 A collection of computer vision and image processing projects focused on real-time applications such as detection, automation, and intelligent systems.
 
@@ -61,6 +61,16 @@ An image processing-based system designed to detect fire in real time and trigge
 ## 📌 Purpose
 
 This repository showcases practical implementations of computer vision concepts applied to real-world scenarios such as security systems, surveillance, and safety automation.
+
+## 🎯 Project Impact
+
+- Enhances real-time security using AI
+  
+- Reduces human dependency in surveillance
+  
+- Provides automatic fire response system
+  
+- Suitable for smart homes & robotics applications
 
 ---
 
