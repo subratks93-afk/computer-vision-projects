@@ -6,7 +6,7 @@ A collection of computer vision and image processing projects focused on real-ti
 
 ## 🚀 Featured Projects
 
-### 🛡️ AI-Based Smart Intruder Detection & Alert System
+### 🔍 AI-Based Smart Intruder Detection & Real-Time Alert System using Computer Vision
 
 A real-time system that detects human faces, identifies authorized users, and sends alerts for intruders using OpenCV and LBPH face recognition.
 
