@@ -1,4 +1,4 @@
-🛡️ AI-Based Smart Intruder Detection & Alert System
+🔍 AI-Based Smart Intruder Detection & Real-Time Alert System using Computer Vision
 
 📌 Overview
 
