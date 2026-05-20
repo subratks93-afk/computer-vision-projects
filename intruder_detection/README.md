@@ -228,6 +228,8 @@ If an intruder is detected:
 
 System correctly identifies authorized users.
 
+Real-time authorized user recognition with multi-human detection support.
+
 ```python
 AUTHORIZED - SUBRAT (55)
 ```
@@ -237,7 +239,6 @@ Image:
 ```markdown
 ![Authorized](authorized_image.png)
 ```
-Real-time authorized user recognition with multi-human detection support.
 ---
 
 ### 🚨 Intruder Detection
