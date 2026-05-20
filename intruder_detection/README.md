@@ -1,6 +1,5 @@
 # 🔍 AI-Based Smart Intruder Detection & Real-Time Alert System using Computer Vision
 
-
 ## 📌 Overview
 
 An AI-powered real-time surveillance system built using Python, OpenCV, YOLOv8, and LBPH face recognition for intelligent intruder monitoring.
@@ -20,13 +19,13 @@ If an intruder is detected, the system automatically:
 - Captures and stores the intruder image
   
 - Triggers a local alarm notification
-  
+
 - Sends instant Telegram alert with captured image
   
 - Adds timestamp information
   
 - Logs event details into CSV file
-  
+
 - Prevents repeated alerts using cooldown protection
 
 ---
@@ -52,7 +51,7 @@ If an intruder is detected, the system automatically:
 - CSV event logging
   
 - Alert cooldown mechanism
-
+  
 - Clean surveillance monitoring UI
   
 - Human count display in live feed
@@ -68,7 +67,7 @@ If an intruder is detected, the system automatically:
 - Recognizes authorized users
   
 - Identifies intruders automatically
-
+  
 - Captures intruder images for evidence
   
 - Sends Telegram alerts with image and timestamp
@@ -104,7 +103,7 @@ If an intruder is detected, the system automatically:
 - Telegram Bot API
   
 - CSV Logging
-  
+
 - Pickle
   
 - Winsound
@@ -131,6 +130,7 @@ Face Recognition (LBPH)
       ↓
 
 Decision Engine
+
 ```
 
 ### Authorized User Flow
@@ -178,27 +178,21 @@ Store Evidence
 ## 🔄 How It Works
 
 ### Step 1: Live Video Capture
-
 The webcam continuously captures live video frames.
 
 ### Step 2: Human Detection
-
 YOLOv8 detects human presence in real time.
 
 ### Step 3: Face Detection
-
 Face detection is performed only inside detected human regions.
 
 ### Step 4: Face Recognition
-
 Detected faces are compared with trained authorized user data using LBPH recognizer.
 
 ### Step 5: Confidence Stabilization
-
 Recognition confidence values are averaged over multiple frames to improve stability and reduce false detections.
 
 ### Step 6: Decision Making
-
 System classifies the detected person as:
 
 - Authorized User
@@ -236,11 +230,7 @@ AUTHORIZED - SUBRAT (55)
 
 Image:
 
-```markdown
-Image:
-
 ![Authorized Detection](authorized_image.png)
-!```
 
 ---
 
@@ -250,9 +240,7 @@ Unknown users are identified as intruders.
 
 Image:
 
-```markdown
 ![Intruder](intruder.png)
-```
 
 ---
 
@@ -262,9 +250,7 @@ Real-time Telegram alert with captured evidence image.
 
 Image:
 
-```markdown
 ![Telegram Alert](intruder_alert.jpeg)
-```
 
 ---
 
@@ -274,9 +260,7 @@ All detection events are stored with timestamp and details.
 
 Image:
 
-```markdown
 ![CSV Log](CSV_log.png)
-```
 
 ---
 
@@ -316,8 +300,10 @@ labels.pkl
 
 ```text
 intruder_detection/
+
 │
-├── intr.py
+
+├── intruder.py
 
 ├── trainer.yml
 
@@ -326,9 +312,11 @@ intruder_detection/
 ├── access_log.csv
 
 │
+
 ├── intruder_images/
 
 │
+
 ├── authorized_image.png
 
 ├── intruder.png
@@ -338,7 +326,6 @@ intruder_detection/
 ├── CSV_log.png
 
 │
-
 └── dataset/
 
     └── SUBRAT/
@@ -349,23 +336,20 @@ intruder_detection/
 ## 📦 Requirements
 
 Hardware:
-
 - Webcam
   
 - Computer / Laptop
-  
+
 - Internet connection
 
 Software:
 - Python 3.10+
-- 
+  
 - Required Python libraries
 
 ---
 
 ## 🛠 Installation
-
-Install dependencies:
 
 ```bash
 pip install opencv-contrib-python ultralytics numpy requests
@@ -375,10 +359,8 @@ pip install opencv-contrib-python ultralytics numpy requests
 
 ## ▶ Running the Project
 
-Run:
-
 ```bash
-python intr.py
+python intruder.py
 ```
 
 To stop:
@@ -413,8 +395,6 @@ CONF_HISTORY_SIZE = 15
 
 ## ⚠ Challenges Faced
 
-During development, the following challenges were addressed:
-
 - False detections
   
 - Recognition instability
@@ -432,8 +412,6 @@ During development, the following challenges were addressed:
 ---
 
 ## 🔮 Future Improvements
-
-Possible upgrades:
 
 - Multi-user face recognition
   
@@ -465,14 +443,12 @@ Possible upgrades:
 
 ✅ Completed
 
-Core project implementation finished successfully.
-
 Current version includes:
 
 - Real-time surveillance
   
 - Human detection
-  
+
 - Face recognition
   
 - Intruder detection
