@@ -237,7 +237,7 @@ Image:
 ```markdown
 ![Authorized](authorized_image.png)
 ```
-
+Real-time authorized user recognition with multi-human detection support.
 ---
 
 ### 🚨 Intruder Detection
