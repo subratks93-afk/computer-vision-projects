@@ -237,8 +237,11 @@ AUTHORIZED - SUBRAT (55)
 Image:
 
 ```markdown
-![Authorized](authorized_image.png)
-```
+Image:
+
+![Authorized Detection](authorized_image.png)
+!```
+
 ---
 
 ### 🚨 Intruder Detection
