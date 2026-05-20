@@ -1,85 +1,124 @@
-# 🔍 AI-Based Smart Intruder Detection & Alert System
+# 🔍 AI-Based Smart Intruder Detection & Real-Time Alert System using Computer Vision
 
----
 
 ## 📌 Overview
 
-A real-time AI surveillance system built using Python and OpenCV that detects human faces through a webcam and identifies whether the person is authorized or an intruder using face recognition.
+An AI-powered real-time surveillance system built using Python, OpenCV, YOLOv8, and LBPH face recognition for intelligent intruder monitoring.
 
-> ⚡ Designed with real-world constraints like false detection handling and alert optimization.
+This system performs real-time human detection, face recognition, and automated intruder alerting through a webcam-based surveillance pipeline.
 
-If an intruder is detected, the system:
+It first detects humans using YOLOv8, then performs face detection and recognition to identify authorized users. If an unknown or unauthorized person is detected, the system automatically captures evidence, triggers alerts, sends Telegram notifications, and logs the event.
 
-* Captures the image
+Designed for practical smart surveillance applications with real-time monitoring, alert automation, and evidence management.
+
+---
+
+## ⚡ Core Functionalities
+
+If an intruder is detected, the system automatically:
+
+- Captures and stores the intruder image
   
-* Triggers an alert
+- Triggers a local alarm notification
   
-* Sends a Telegram notification
+- Sends instant Telegram alert with captured image
   
-* Logs the event
+- Adds timestamp information
+  
+- Logs event details into CSV file
+  
+- Prevents repeated alerts using cooldown protection
 
 ---
 
 ## ⭐ Key Highlights
 
-* Real-time face detection and recognition
+- Real-time human detection using YOLOv8
   
-* Intelligent intruder alert system
+- Face detection using Haar Cascade
   
-* Telegram integration with image alerts
+- Face recognition using LBPH algorithm
+  
+- Authorized user identification
+  
+- Unknown intruder classification
+  
+- Confidence averaging for stable recognition
+  
+- Telegram alert integration
+  
+- Intruder image evidence storage
+  
+- CSV event logging
+  
+- Alert cooldown mechanism
 
-* Stable predictions using confidence averaging
+- Clean surveillance monitoring UI
   
-* Cooldown mechanism to prevent alert spam
-  
-* Designed for real-world surveillance applications
+- Human count display in live feed
 
 ---
 
 ## 🚀 Features
 
-* Detects faces in real-time using webcam
+- Detects humans in real-time via webcam
   
-* Recognizes authorized users using LBPH model
+- Detects faces inside detected human regions
   
-* Identifies unknown persons as intruders
+- Recognizes authorized users
   
-* Captures and stores intruder images
+- Identifies intruders automatically
+
+- Captures intruder images for evidence
   
-* Sends Telegram alerts with captured image
+- Sends Telegram alerts with image and timestamp
   
-* Triggers beep sound for local alert
+- Triggers local beep alarm
   
-* Maintains CSV log of all events
+- Maintains CSV event logging
   
-* Confidence averaging for stable detection
+- Uses confidence averaging for stable predictions
   
-* Cooldown system to avoid repeated alerts
+- Prevents alert spamming using cooldown logic
+  
+- Displays live human count
+  
+- Displays recognition status in real time
 
 ---
 
 ## 🧠 Technologies Used
 
-* Python
+- Python
   
-* OpenCV (`opencv-contrib-python`)
+- OpenCV
   
-* NumPy
+- YOLOv8 (Ultralytics)
   
-* LBPH Face Recognition
+- Haar Cascade
   
-* Haar Cascade (Face Detection)
+- LBPH Face Recognition
   
-* Telegram Bot API
+- NumPy
   
-* CSV (Logging system)
+- Telegram Bot API
+  
+- CSV Logging
+  
+- Pickle
+  
+- Winsound
 
 ---
 
 ## 🧩 System Architecture
 
-```
+```text
 Webcam Input
+
+      ↓
+
+YOLOv8 Human Detection
 
       ↓
 
@@ -91,35 +130,95 @@ Face Recognition (LBPH)
 
       ↓
 
-Decision Making
+Decision Engine
+```
 
+### Authorized User Flow
 
-Authorized → No Action
- 
-Intruder → Alert + Capture + Notify + Log
+```text
+Authorized Person Detected
+
+      ↓
+
+Display AUTHORIZED Status
+
+      ↓
+
+Continue Monitoring
+```
+
+### Intruder Flow
+
+```text
+Intruder Detected
+
+      ↓
+
+Capture Image
+
+      ↓
+
+Trigger Alarm
+
+      ↓
+
+Send Telegram Alert
+
+      ↓
+
+Save CSV Log
+
+      ↓
+
+Store Evidence
 ```
 
 ---
 
 ## 🔄 How It Works
 
-1. Webcam captures live video
-   
-2. Faces are detected using Haar Cascade
-   
-3. Face is compared with trained dataset
-   
-4. System checks confidence score
-   
-5. If intruder detected:
+### Step 1: Live Video Capture
 
-   * Beep alert is triggered
-     
-   * Image is saved
-     
-   * Telegram alert is sent
-     
-   * Event is logged in CSV
+The webcam continuously captures live video frames.
+
+### Step 2: Human Detection
+
+YOLOv8 detects human presence in real time.
+
+### Step 3: Face Detection
+
+Face detection is performed only inside detected human regions.
+
+### Step 4: Face Recognition
+
+Detected faces are compared with trained authorized user data using LBPH recognizer.
+
+### Step 5: Confidence Stabilization
+
+Recognition confidence values are averaged over multiple frames to improve stability and reduce false detections.
+
+### Step 6: Decision Making
+
+System classifies the detected person as:
+
+- Authorized User
+  
+- Unsure
+  
+- Intruder
+
+### Step 7: Automated Intruder Response
+If an intruder is detected:
+
+- Image is captured
+  
+- Local alarm is triggered
+  
+- Telegram alert is sent
+  
+- Event is logged in CSV
+  
+- Evidence image is stored
 
 ---
 
@@ -127,51 +226,93 @@ Intruder → Alert + Capture + Notify + Log
 
 ### ✅ Authorized User Detection
 
-System correctly identifies an authorized user.
+System correctly identifies authorized users.
 
+```python
+AUTHORIZED - SUBRAT (55)
+```
+
+Image:
+
+```markdown
 ![Authorized](authorized_image.png)
+```
 
 ---
 
 ### 🚨 Intruder Detection
 
-Unknown person detected and classified as intruder.
+Unknown users are identified as intruders.
 
+Image:
+
+```markdown
 ![Intruder](intruder.png)
+```
 
 ---
 
-### 📊 CSV Log Output
+### 📩 Telegram Alert Notification
 
-All detection events are recorded with timestamp and status.
+Real-time Telegram alert with captured evidence image.
 
+Image:
+
+```markdown
+![Telegram Alert](intruder_alert.jpeg)
+```
+
+---
+
+### 📊 CSV Event Logging
+
+All detection events are stored with timestamp and details.
+
+Image:
+
+```markdown
 ![CSV Log](CSV_log.png)
-
----
-
-### 📩 Telegram Alert Output
-
-The system sends a real-time alert via Telegram with image and timestamp.
-
-![Intruder Alert](intruder_alert.jpeg)
+```
 
 ---
 
 ## 📂 Data Storage
 
-* Intruder images → `intruder_images/`
-  
-* Logs → `access_log.csv`
+### Intruder Images
+Stored in:
+
+```text
+intruder_images/
+```
+
+### Event Logs
+Stored in:
+
+```text
+access_log.csv
+```
+
+### Trained Model
+Stored in:
+
+```text
+trainer.yml
+```
+
+### Label Mapping
+Stored in:
+
+```text
+labels.pkl
+```
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 intruder_detection/
-
 │
-
 ├── intr.py
 
 ├── trainer.yml
@@ -181,8 +322,16 @@ intruder_detection/
 ├── access_log.csv
 
 │
-
 ├── intruder_images/
+
+│
+├── authorized_image.png
+
+├── intruder.png
+
+├── intruder_alert.jpeg
+
+├── CSV_log.png
 
 │
 
@@ -195,72 +344,143 @@ intruder_detection/
 
 ## 📦 Requirements
 
-* Python 3.10
+Hardware:
+
+- Webcam
   
-* Webcam
+- Computer / Laptop
   
-* Internet connection (for Telegram alerts)
+- Internet connection
+
+Software:
+- Python 3.10+
+- 
+- Required Python libraries
 
 ---
 
-## 🛠️ Installation
+## 🛠 Installation
 
-```
-pip install opencv-contrib-python numpy requests
+Install dependencies:
+
+```bash
+pip install opencv-contrib-python ultralytics numpy requests
 ```
 
 ---
 
-## ▶️ Run
+## ▶ Running the Project
 
-```
+Run:
+
+```bash
 python intr.py
 ```
 
-Press **'s'** to stop the system.
+To stop:
 
----
-
-## ⚠️ Important Note
-
-Update your Telegram credentials before running:
-
-```
-bot_token = "YOUR_BOT_TOKEN"
-
-chat_id = "YOUR_CHAT_ID"
+```bash
+Press 's'
 ```
 
 ---
 
-## ⚠️ Challenges Faced
+## ⚙ Configuration
 
-* Reducing false detections
+Update Telegram credentials:
+
+```python
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+
+CHAT_ID = "YOUR_CHAT_ID"
+```
+
+Configure thresholds:
+
+```python
+CONFIDENCE_THRESHOLD = 65
+
+ALERT_COOLDOWN = 15
+
+CONF_HISTORY_SIZE = 15
+```
+
+---
+
+## ⚠ Challenges Faced
+
+During development, the following challenges were addressed:
+
+- False detections
   
-* Stabilizing predictions using confidence averaging
+- Recognition instability
   
-* Avoiding alert spam using cooldown mechanism
+- Alert spam prevention
+  
+- Human detection + face recognition integration
+  
+- Real-time performance optimization
+  
+- UI readability improvement
+  
+- Confidence smoothing logic implementation
 
 ---
 
 ## 🔮 Future Improvements
 
-* Multi-user face recognition
+Possible upgrades:
+
+- Multi-user face recognition
   
-* Raspberry Pi deployment
+- Face anti-spoofing detection
   
-* GUI dashboard
+- FaceNet / deep learning face recognition
   
-* Deep learning-based upgrade (YOLO / CNN)
+- Web dashboard monitoring
+  
+- Person tracking integration
+  
+- Video recording support
+  
+- Raspberry Pi deployment
+  
+- Mobile app integration
+  
+- Cloud database logging
 
 ---
 
 ## 👨‍💻 Author
 
-Subrat
+**Subrat**
+
+---
+
+## 📌 Project Status
+
+✅ Completed
+
+Core project implementation finished successfully.
+
+Current version includes:
+
+- Real-time surveillance
+  
+- Human detection
+  
+- Face recognition
+  
+- Intruder detection
+  
+- Alert automation
+  
+- Logging
+  
+- Evidence capture
 
 ---
 
 ## ⭐ About
 
-A real-time AI surveillance system for detecting and alerting intruders using computer vision.
+An AI-powered smart surveillance system for real-time human detection, face recognition, and automated intruder alerting using computer vision.
