@@ -1,44 +1,58 @@
 # 🔐🔥 AI-Based Surveillance & Fire Detection Projects
 
-A collection of computer vision and image processing projects focused on real-time applications such as detection, automation, and intelligent systems.
+A collection of AI-powered computer vision and image processing projects focused on real-time surveillance, detection, safety automation, and intelligent monitoring systems.
 
 ---
 
 ## 🚀 Featured Projects
 
-### 🔍 AI-Based Smart Intruder Detection & Alert System
+### 🔍 AI-Based Smart Intruder Detection & Real-Time Alert System
 
-A real-time system that detects human faces, identifies authorized users, and sends alerts for intruders using OpenCV and LBPH face recognition.
+An AI-powered real-time surveillance system that detects humans, recognizes authorized users, identifies intruders, and automatically triggers alerts using computer vision.
 
 🔹 Features:
 
-* Real-time face detection & recognition
+- YOLOv8-based real-time human detection
   
-* Intruder alert system (Telegram + Beep)
+- Face detection and LBPH face recognition
   
-* Image capture of intruders
+- Authorized / intruder classification
   
-* CSV-based logging system
+- Intruder image capture and evidence storage
   
-* Confidence filtering & cooldown mechanism
+- Telegram alert notifications with timestamped image
+  
+- Local alarm alert (beep notification)
+  
+- CSV-based event logging
+  
+- Confidence averaging for stable recognition
+  
+- Cooldown mechanism to prevent alert spam
+  
+- Live surveillance UI with human count monitoring
 
-👉 [View Project](https://github.com/subratks93-afk/computer-vision-projects/blob/main/intruder_detection/README.md)
+👉 [View Project](https://github.com/subratks93-afk/computer-vision-projects/tree/main/intruder_detection)
 
 ---
 
-### 🔥 Fire Detection & Protection (Raspberry Pi)
+### 🔥 Fire Detection & Protection System (Raspberry Pi)
 
-An image processing-based system designed to detect fire in real time and trigger safety actions using a Raspberry Pi.
+A real-time fire detection and protection system built using image processing and Raspberry Pi for intelligent safety monitoring.
 
 🔹 Features:
 
-* Real-time fire detection using camera input
+- Real-time fire detection using live camera feed
   
-* Image processing-based analysis
+- Image processing-based fire analysis
   
-* Alert mechanism for safety response
+- Automated alert mechanism
   
-* Can be extended to automatic protection systems
+- Safety response integration
+  
+- Raspberry Pi deployment
+  
+- Real-time monitoring application
 
 👉 [View Project](fire_detection_raspberry_pi/README.md)
 
@@ -46,36 +60,51 @@ An image processing-based system designed to detect fire in real time and trigge
 
 ## 🧠 Technologies Used
 
-* Python
+- Python
   
-* OpenCV
+- OpenCV
   
-* NumPy
+- YOLOv8
   
-* Machine Learning (LBPH)
+- NumPy
   
-* Computer Vision
+- Computer Vision
+  
+- Image Processing
+  
+- Machine Learning
+  
+- LBPH Face Recognition
+  
+- Telegram Bot API
+  
+- Raspberry Pi
 
 ---
 
 ## 📌 Purpose
 
-This repository showcases practical implementations of computer vision concepts applied to real-world scenarios such as security systems, surveillance, and safety automation.
+This repository showcases practical AI and computer vision implementations for solving real-world surveillance, security, and safety challenges through intelligent automation.
+
+---
 
 ## 🎯 Project Impact
 
-- Enhances real-time security using AI
+- Enhances real-time surveillance security using AI
   
-- Reduces human dependency in surveillance
+- Automates intruder detection and alert response
   
-- Provides automatic fire response system
+- Reduces dependency on manual monitoring
   
-- Suitable for smart homes & robotics applications
+- Provides intelligent fire safety monitoring
+  
+- Demonstrates practical computer vision deployment
+  
+- Suitable for surveillance, smart safety, and robotics applications
 
 ---
 
 ## 👨‍💻 Author
 
-Subrat
-
-AI & Robotics Enthusiast 🚀
+**Subrat**  
+AI | Computer Vision | Robotics Enthusiast 🚀
