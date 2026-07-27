@@ -108,6 +108,8 @@ Upon detecting fire, the system can:
   
 - OpenCV
   
+- PyTorch
+  
 - Deep Learning (CNN)
   
 - Raspberry Pi GPIO
