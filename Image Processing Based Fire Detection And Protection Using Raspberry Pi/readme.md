@@ -164,15 +164,7 @@ The system successfully performs:
 
 > Add your project screenshots inside this section.
 
-```markdown
-![Prototype](images/prototype.jpg)
 
-![Fire Detection](images/fire_detection.png)
-
-![Dashboard](images/dashboard.png)
-
-![Alert System](images/alert.png)
-```
 
 ---
 
