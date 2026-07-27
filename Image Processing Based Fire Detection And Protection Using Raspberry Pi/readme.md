@@ -88,6 +88,8 @@ Upon detecting fire, the system can:
   
 - Jupyter Notebook
   
+- PyTorch
+  
 - HTML
   
 - CSS
