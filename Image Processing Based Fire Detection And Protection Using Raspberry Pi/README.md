@@ -159,11 +159,20 @@ The system successfully performs:
   
 - Web dashboard monitoring
 
-### Screenshots
 
-> Add your project screenshots inside this section.
+## 📸 Project Screenshots
 
+### Hardware Setup
+![Hardware Setup](images/Hardware_Setup.jpeg)
 
+### Fire Detection Output
+![Fire Detection Output](images/Fire_Detection_Output.jpeg)
+
+### Camera Detection
+![Camera Detection](images/Camera Detection.jpeg)
+
+### Dashboard Alert
+![Dashboard Alert](images/Dashboard Alert.jpeg)
 
 ---
 
