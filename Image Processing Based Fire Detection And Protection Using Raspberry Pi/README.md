@@ -162,18 +162,21 @@ The system successfully performs:
 
 ## 📸 Project Screenshots
 
-### Hardware Setup
-![Hardware Setup](images/Hardware_Setup.jpeg)
+## Camera Detection
 
-### Fire Detection Output
+![Camera Detection](images/Camera%20Detection.jpeg)
+
+## Dashboard Alert
+
+![Dashboard Alert](images/Dashboard%20Alert.jpeg)
+
+## Fire Detection Output
+
 ![Fire Detection Output](images/Fire_Detection_Output.jpeg)
 
-### Camera Detection
-![Camera Detection](images/Camera Detection.jpeg)
+## Hardware Setup
 
-### Dashboard Alert
-![Dashboard Alert](images/Dashboard Alert.jpeg)
-
+![Hardware Setup](images/Hardware_Setup.jpeg)
 ---
 
 ## 🚀 Future Improvements
