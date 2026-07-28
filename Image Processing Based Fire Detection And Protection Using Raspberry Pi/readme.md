@@ -54,27 +54,20 @@ Upon detecting fire, the system can:
 
 ## 🛠️ Hardware Used
 
-- Raspberry Pi 4 Model B
-  
-- Camera Module / USB Camera
-  
-- Smoke Sensor
-  
-- Temperature Sensor
-  
-- Analog-to-Digital Converter (ADC) Module
-  
-- Motor Driver
-  
-- Stepper Motor
-  
-- Relay Module
-  
-- 12V DC Water Pump
-  
-- Buzzer
-  
-- Power Supply
+1. Raspberry Pi 4 Model B
+2. Logitech 720p USB Camera
+3. Stepper Motor
+4. Smoke Sensor
+5. Heat Sensor
+6. Buzzer
+7. 12V DC Solar Water Pump
+8. Power Supply
+   - 220V AC to 12V AC Step-Down Transformer
+   - LM2596 DC-DC Buck Converter (12V to 5V)
+   - Bridge Rectifier
+   - 4 × Rectifier Diodes
+   - 25V 1000µF Capacitor
+   - 7812 Voltage Regulator
 
 ---
 
@@ -99,6 +92,8 @@ Upon detecting fire, the system can:
 - Tailwind CSS
   
 - Chart.js
+
+- Computer Vision
 
 ---
 
