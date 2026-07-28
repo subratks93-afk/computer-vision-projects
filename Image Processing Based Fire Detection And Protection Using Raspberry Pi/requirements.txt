@@ -1,0 +1,9 @@
+numpy
+opencv-python
+torch
+torchvision
+Pillow
+matplotlib
+seaborn
+scikit-learn
+RPi.GPIO

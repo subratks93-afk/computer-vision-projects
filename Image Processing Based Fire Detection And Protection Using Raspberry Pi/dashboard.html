@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Detection Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        canvas {
+            max-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-danger">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white fw-bold" href="#">🔥 Fire Detection Dashboard</a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-danger text-white fw-bold">Fire Alert Status</div>
+                    <div class="card-body">
+                        <h3 id="fire-status" class="status-text text-success">No Fire Detected</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-primary text-white fw-bold">Live Camera Feed</div>
+                    <div class="card-body">
+                        <img id="camera-feed" src="http://192.168.34.97:8080/?action=stream" class="img-fluid rounded"
+                            alt="Live Feed" onerror="this.onerror=null; this.src='fallback-image.jpg';">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white fw-bold">Fire Detection Log</div>
+                    <div class="card-body">
+                        <canvas id="fireLogChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white fw-bold">Sensor Data</div>
+                    <div class="card-body">
+                        <canvas id="sensorPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark fw-bold">Fire Alert Message</div>
+                    <div class="card-body">
+                        <h3 id="fire-status-alert" class="status-text text-success">No Fire Detected</h3>
+
+                        <p id="fire-detection" class="text-success">No Fire Detected</p>
+                        <p id="co2-status" class="text-secondary">Inactive</p>
+                        <textarea id="alert-message" class="form-control"
+                            rows="3">Fire alert message sent to the nearest fire station.</textarea>
+                        <button id="send-alert-btn" class="btn btn-danger mt-2">Send Alert</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="alert alert-danger text-center fw-bold" id="fire-alert" style="display: none;">
+                    🔥 Fire detected! Message sent to the nearest fire station! 🔥
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let fireLogCtx = document.getElementById('fireLogChart').getContext('2d');
+            let sensorPieCtx = document.getElementById('sensorPieChart').getContext('2d');
+            let fireStatus = document.getElementById("fire-status");
+
+            let fireDetected = false;
+
+            // Initialize Fire Log Chart
+            let fireLogChart = new Chart(fireLogCtx, {
+                type: 'line',
+                data: { labels: [], datasets: [{ label: 'Fire Detections', data: [], backgroundColor: 'red', borderColor: 'red', borderWidth: 2 }] }
+            });
+
+            // Initialize Sensor Pie Chart
+            let sensorPieChart = new Chart(sensorPieCtx, {
+                type: 'pie',
+                data: { labels: ['Temperature', 'Smoke Level'], datasets: [{ data: [0, 0], backgroundColor: ['red', 'orange'] }] }
+            });
+
+            // Function to fetch and update fire data
+            async function fetchFireData() {
+                try {
+                    const response = await fetch("http://localhost:8080/api/fire-data");
+                    const data = await response.json();
+                    if (!data) return;
+
+                    // Update Fire Log Chart
+                    fireLogChart.data.labels = data.fireLog.labels;
+                    fireLogChart.data.datasets[0].data = data.fireLog.values;
+                    fireLogChart.update();
+
+                    // Update Sensor Pie Chart
+                    sensorPieChart.data.datasets[0].data = data.sensorData.values;
+                    sensorPieChart.update();
+
+                    // If fire is detected in the live feed, override API status
+                    if (!fireDetected) {
+                        updateFireDetectionStatus(data.isFireDetected);
+                    }
+                } catch (error) {
+                    console.error("Error fetching fire data:", error);
+                }
+            }
+
+            // Function to check for fire in the live feed
+            function checkFireInLiveFeed() {
+                let video = document.getElementById("camera-feed");
+                let canvas = document.createElement("canvas");
+                let ctx = canvas.getContext("2d");
+                canvas.width = video.width;
+                canvas.height = video.height;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let pixels = imageData.data;
+                let firePixels = 0;
+                for (let i = 0; i < pixels.length; i += 4) {
+                    let r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+                    if (r > 150 && g < 100 && b < 100) firePixels++; // Detect red shades
+                }
+
+                if (firePixels > 500) { // Adjust sensitivity threshold
+                    fireDetected = true;
+                    updateFireDetectionStatus(true);
+                } else {
+                    fireDetected = false;
+                }
+            }
+
+            // Function to update UI based on fire detection status
+            function updateFireDetectionStatus(isFireDetected) {
+                let fireDetection = document.getElementById("fire-detection");
+                let co2Status = document.getElementById("co2-status");
+                let fireAlert = document.getElementById("fire-alert");
+                if (isFireDetected) {
+                    fireStatus.classList.replace("text-success", "text-danger");
+                    fireStatus.innerText = "🔥 Fire Detected!";
+                    fireDetection.classList.replace("text-success", "text-danger");
+                    fireDetection.innerText = "Fire Detected!";
+                    co2Status.classList.replace("text-secondary", "text-primary");
+                    co2Status.innerText = "Active";
+                    fireAlert.style.display = "block";
+                } else {
+                    fireStatus.classList.replace("text-danger", "text-success");
+                    fireStatus.innerText = "No Fire Detected";
+                    fireDetection.classList.replace("text-danger", "text-success");
+                    fireDetection.innerText = "No Fire Detected";
+                    co2Status.classList.replace("text-primary", "text-secondary");
+                    co2Status.innerText = "Inactive";
+                    fireAlert.style.display = "none";
+                }
+            }
+
+            // Function to send fire alert
+            function sendFireAlert() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(async position => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        const alertMessage = document.getElementById("alert-message").value;
+
+                        const payload = { alert: alertMessage, location: { latitude, longitude } };
+                        try {
+                            const response = await fetch("http://localhost:8080/fire-alert", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload)
+                            });
+                            const result = await response.json();
+                            alert(`🔥 Alert sent: ${result.fireStation} notified!`);
+                        } catch (error) {
+                            alert("Error sending alert. Please try again.");
+                        }
+                    }, () => alert("Location access denied. Unable to send location."));
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+
+            // Attach event listener to alert button
+            document.getElementById("send-alert-btn").addEventListener("click", sendFireAlert);
+
+            // Fetch fire data every 5 seconds
+            fetchFireData();
+            setInterval(fetchFireData, 5000);
+
+            // Check live feed for fire every 2 seconds
+            setInterval(checkFireInLiveFeed, 2000);
+        });
+    </script>
+</body>
+
+</html>
