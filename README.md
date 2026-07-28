@@ -36,7 +36,7 @@ An AI-powered real-time surveillance system that detects humans, recognizes auth
 
 ---
 
-### 🔥 Fire Detection & Protection System (Raspberry Pi)
+### 🔥 Image Processing Based Fire Detection And Protection Using Raspberry Pi 
 
 A real-time fire detection and protection system built using image processing and Raspberry Pi for intelligent safety monitoring.
 
@@ -54,7 +54,7 @@ A real-time fire detection and protection system built using image processing an
   
 - Real-time monitoring application
 
-👉 [View Project](fire_detection_raspberry_pi/README.md)
+👉 [View Project](https://github.com/subratks93-afk/computer-vision-projects).
 
 ---
 
