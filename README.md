@@ -54,7 +54,7 @@ A real-time fire detection and protection system built using image processing an
   
 - Real-time monitoring application
 
-👉 [View Project](https://github.com/subratks93-afk/computer-vision-projects).
+👉 [View Project](https://github.com/subratks93-afk/computer-vision-projects/tree/main/Image%20Processing%20Based%20Fire%20Detection%20And%20Protection%20Using%20Raspberry%20Pi).
 
 ---
 
